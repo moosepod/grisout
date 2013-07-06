@@ -5,10 +5,16 @@
     <events>
         <event-group description="" sid="5821702155890664" title="Controls">
             <sub-events>
-                <event-block sid="7243244512327734">
+                <event-block any="1" sid="7243244512327734">
                     <conditions>
                         <condition id="2" name="Key is down" sid="2774105914061349" type="Keyboard">
                             <param id="0" name="Key">65 (A)</param>
+                        </condition>
+                        <condition id="5" name="Compare axis" sid="9500949320453415" type="Gamepad">
+                            <param id="0" name="Gamepad">0</param>
+                            <param id="1" name="Axis">0</param>
+                            <param id="2" name="Comparison">2</param>
+                            <param id="3" name="Value">-5</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -17,10 +23,16 @@
                         </action>
                     </actions>
                 </event-block>
-                <event-block sid="9996442417789426">
+                <event-block any="1" sid="9996442417789426">
                     <conditions>
                         <condition id="2" name="Key is down" sid="8066935064492833" type="Keyboard">
                             <param id="0" name="Key">68 (D)</param>
+                        </condition>
+                        <condition id="5" name="Compare axis" sid="4530979932580832" type="Gamepad">
+                            <param id="0" name="Gamepad">0</param>
+                            <param id="1" name="Axis">0</param>
+                            <param id="2" name="Comparison">4</param>
+                            <param id="3" name="Value">5</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -31,5 +43,13 @@
                 </event-block>
             </sub-events>
         </event-group>
+        <event-block sid="7103538379272859">
+            <conditions />
+            <actions />
+        </event-block>
+        <event-block sid="4424847175524761">
+            <conditions />
+            <actions />
+        </event-block>
     </events>
 </c2eventsheet>
