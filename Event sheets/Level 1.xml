@@ -3,6 +3,36 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Level 1</name>
     <events>
+        <comment>Initial setup</comment>
+        <event-group description="" sid="957797604085997" title="Level Start">
+            <sub-events>
+                <event-block sid="9260387561000024">
+                    <conditions>
+                        <condition id="1" name="On any key pressed" sid="4768239916811569" type="Keyboard" />
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="2652514764999118" type="System">
+                            <param id="0" name="Group name">&quot;LevelActive&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" inactive="1" sid="7116492847067155" title="LevelActive">
+            <sub-events>
+                <event-block sid="7431757058675383">
+                    <conditions>
+                        <condition id="-1" name="Every tick" sid="3647517043591071" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-17" name="Move forward" sid="5909433676663753" type="Ball">
+                            <param id="0" name="Distance">Ball.Speed</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
         <event-group description="" sid="5821702155890664" title="Controls">
             <sub-events>
                 <event-block any="1" sid="7243244512327734">
@@ -43,13 +73,39 @@
                 </event-block>
             </sub-events>
         </event-group>
-        <event-block sid="7103538379272859">
-            <conditions />
-            <actions />
-        </event-block>
-        <event-block sid="4424847175524761">
-            <conditions />
-            <actions />
-        </event-block>
+        <event-group description="" sid="9482662385140615" title="Ball">
+            <sub-events>
+                <event-block sid="629908649590618">
+                    <conditions>
+                        <condition id="-2" name="Compare Y" sid="5769344288594379" type="Ball">
+                            <param id="0" name="Comparison">2</param>
+                            <param id="1" name="Y co-ordinate">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="4022878821041994" type="Ball">
+                            <param id="0" name="Instance variable">Speed</param>
+                            <param id="1" name="Value">Ball.Speed * -1</param>
+                        </action>
+                        <action id="-2" name="Set Y" sid="9875111535736575" type="Ball">
+                            <param id="0" name="Y">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="9226416197626216">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="690543295485235" type="Ball">
+                            <param id="0" name="Object">Paddle</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="9330689353034169" type="Ball">
+                            <param id="0" name="Instance variable">Speed</param>
+                            <param id="1" name="Value">Ball.Speed*-1</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
     </events>
 </c2eventsheet>
