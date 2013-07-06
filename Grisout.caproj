@@ -9,8 +9,15 @@
     <app-id>com.mycompany.myapp</app-id>
     <unique-id>yr3efbn2115t</unique-id>
     <saved-with-version>13200</saved-with-version>
-    <used-plugins />
-    <used-behaviors />
+    <used-plugins>
+        <plugin author="Scirra" id="Keyboard" version="1">Keyboard</plugin>
+        <plugin author="Scirra" id="Sprite" version="1">Sprite</plugin>
+        <plugin author="Scirra" id="gamepad" version="1">Gamepad</plugin>
+    </used-plugins>
+    <used-behaviors>
+        <behavior author="Scirra" id="EightDir" version="1">8 Direction</behavior>
+        <behavior author="Scirra" id="bound" version="1">Bound to layout</behavior>
+    </used-behaviors>
     <used-effects />
     <configurations>
         <configuration exporter-descname="HTML5" exporter-id="html5" name="HTML5" />
@@ -32,7 +39,41 @@
         <prop name="Sampling">Linear</prop>
         <prop name="Use iOS retina display">All devices</prop>
     </configuration-settings>
-    <object-folder expanded="1" />
+    <object-folder expanded="1">
+        <object-type name="Paddle" sid="6608739202425872">
+            <plugin id="Sprite" />
+            <instance-variables>
+                <instance-variable name="Speed" sid="3650259416385819" type="number" />
+            </instance-variables>
+            <behaviors>
+                <behavior-type name="8Direction" sid="4744665166610655">
+                    <behavior id="EightDir" />
+                </behavior-type>
+                <behavior-type name="BoundToLayout" sid="7618330777777809">
+                    <behavior id="bound" />
+                </behavior-type>
+            </behaviors>
+            <animation-folder expanded="1">
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="2407309918941043" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Keyboard" sid="6327471625321867">
+            <plugin id="Keyboard" />
+        </object-type>
+        <object-type name="Gamepad" sid="5559118087688">
+            <plugin id="gamepad" />
+        </object-type>
+        <object-type name="Sprite" sid="2620379282353691">
+            <plugin id="Sprite" />
+            <animation-folder expanded="1">
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="2304097222259874" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                </animation>
+            </animation-folder>
+        </object-type>
+    </object-folder>
     <families />
     <layout-folder expanded="1">
         <layout>Level 1.xml</layout>
@@ -40,7 +81,14 @@
     <event-folder expanded="1">
         <event-sheet>Level 1.xml</event-sheet>
     </event-folder>
-    <global-instances />
+    <global-instances>
+        <global-instance type="Keyboard" uid="1" />
+        <global-instance type="Gamepad" uid="2">
+            <properties>
+                <analog-deadzone>25</analog-deadzone>
+            </properties>
+        </global-instance>
+    </global-instances>
     <sounds-folder expanded="1" />
     <music-folder expanded="1" />
     <files-folder expanded="1" />
