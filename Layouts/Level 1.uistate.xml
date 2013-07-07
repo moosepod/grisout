@@ -17,7 +17,7 @@ you probably do not want to add any .uistate.xml files to the repository.-->
     <snap-height>32</snap-height>
     <properties>
         <property expanded="1" name="Layout properties" />
-        <property expanded="0" name="Layout Size" />
+        <property expanded="1" name="Layout Size" />
         <property expanded="0" name="Margins" />
         <property expanded="1" name="Effects" />
     </properties>
