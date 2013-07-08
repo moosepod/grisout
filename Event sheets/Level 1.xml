@@ -3,6 +3,8 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Level 1</name>
     <events>
+        <variable constant="0" name="BounceY" sid="315551210991567" static="0" type="number">0</variable>
+        <variable constant="0" name="BounceX" sid="7254206758824236" static="0" type="number">0</variable>
         <variable constant="0" name="Lives" sid="7973244838052505" static="0" type="number">3</variable>
         <variable constant="0" name="Score" sid="6456173871297704" static="0" type="number">0</variable>
         <comment>Initial setup</comment>
@@ -23,7 +25,7 @@
                         <action id="-8" name="Set angle" sid="6995594538628601" type="Ball">
                             <param id="0" name="Angle">270</param>
                         </action>
-                        <action id="0" name="Call function" sid="6920359082210992" type="UpdateUI">
+                        <action id="0" name="Call function" sid="5639517633543272" type="Function">
                             <param id="0" name="Name">&quot;UpdateUI&quot;</param>
                             <param id="1" name="Parameter {n}"></param>
                         </action>
@@ -90,7 +92,7 @@
             </sub-events>
         </event-group>
         <comment>Handles the bounce logic around the ball</comment>
-        <event-group collapsed="1" description="" sid="9482662385140615" title="Ball">
+        <event-group description="" sid="9482662385140615" title="Ball">
             <sub-events>
                 <event-block sid="629908649590618">
                     <conditions>
@@ -150,6 +152,28 @@
                         </action>
                     </actions>
                 </event-block>
+                <comment>Ugly here, but I need &quot;if&quot; statements on the parameters</comment>
+                <event-block sid="111418285086737">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="9389954219897384" type="Ball">
+                            <param id="0" name="Object">Brick</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="6825778961146116" type="Brick" />
+                        <action id="-18" name="Rotate clockwise" sid="8699839570287039" type="Ball">
+                            <param id="0" name="Degrees">180</param>
+                        </action>
+                        <action id="-10" name="Add to" sid="3061136335928658" type="System">
+                            <param id="0" name="Variable">Score</param>
+                            <param id="1" name="Value">10</param>
+                        </action>
+                        <action id="0" name="Call function" sid="4842999262294006" type="Function">
+                            <param id="0" name="Name">&quot;UpdateScore&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
+                    </actions>
+                </event-block>
                 <comment>Reset when we go off the bottom of the screen</comment>
                 <event-block sid="9593051884963584">
                     <conditions>
@@ -176,7 +200,7 @@
                             <param id="0" name="Variable">Lives</param>
                             <param id="1" name="Value">Lives-1</param>
                         </action>
-                        <action id="0" name="Call function" sid="9185324937282899" type="UpdateUI">
+                        <action id="0" name="Call function" sid="5445031366849142" type="Function">
                             <param id="0" name="Name">&quot;UpdateUI&quot;</param>
                             <param id="1" name="Parameter {n}"></param>
                         </action>
@@ -205,20 +229,28 @@
             <conditions />
             <actions />
         </event-block>
-        <event-block sid="6686312551969542">
-            <conditions>
-                <condition id="0" name="On function" sid="5703169562571482" type="UpdateUI">
-                    <param id="0" name="Name">&quot;UpdateUI&quot;</param>
-                </condition>
-            </conditions>
-            <actions>
-                <action id="0" name="Set text" sid="398267481071354" type="Score">
-                    <param id="0" name="Text">Score</param>
-                </action>
-                <action id="0" name="Set text" sid="3768605877921995" type="Balls">
-                    <param id="0" name="Text">Lives</param>
-                </action>
-            </actions>
+        <event-group description="" sid="5690548571171111" title="Functions">
+            <sub-events>
+                <event-block sid="6686312551969542">
+                    <conditions>
+                        <condition id="0" name="On function" sid="3934955246852599" type="Function">
+                            <param id="0" name="Name">&quot;UpdateUI&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set text" sid="398267481071354" type="Score">
+                            <param id="0" name="Text">Score</param>
+                        </action>
+                        <action id="0" name="Set text" sid="3768605877921995" type="Balls">
+                            <param id="0" name="Text">Lives</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-block sid="9980669916347307">
+            <conditions />
+            <actions />
         </event-block>
     </events>
 </c2eventsheet>
