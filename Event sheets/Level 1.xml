@@ -3,19 +3,35 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Level 1</name>
     <events>
+        <variable constant="0" name="Lives" sid="7973244838052505" static="0" type="number">3</variable>
+        <variable constant="0" name="Score" sid="6456173871297704" static="0" type="number">0</variable>
         <comment>Initial setup</comment>
         <event-group description="" sid="957797604085997" title="Level Start">
             <sub-events>
                 <event-block sid="9260387561000024">
                     <conditions>
                         <condition id="1" name="On any key pressed" sid="4768239916811569" type="Keyboard" />
+                        <condition id="-15" inverted="1" name="Is group active" sid="2046919089521791" type="System">
+                            <param id="0" name="Group name">&quot;LevelActive&quot;</param>
+                        </condition>
                     </conditions>
                     <actions>
                         <action id="-12" name="Set group active" sid="2652514764999118" type="System">
                             <param id="0" name="Group name">&quot;LevelActive&quot;</param>
                             <param id="1" name="State">1</param>
                         </action>
+                        <action id="-8" name="Set angle" sid="6995594538628601" type="Ball">
+                            <param id="0" name="Angle">270</param>
+                        </action>
+                        <action id="0" name="Call function" sid="6920359082210992" type="UpdateUI">
+                            <param id="0" name="Name">&quot;UpdateUI&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
                     </actions>
+                </event-block>
+                <event-block sid="5513137870424602">
+                    <conditions />
+                    <actions />
                 </event-block>
             </sub-events>
         </event-group>
@@ -33,7 +49,7 @@
                 </event-block>
             </sub-events>
         </event-group>
-        <event-group description="" sid="5821702155890664" title="Controls">
+        <event-group collapsed="1" description="" sid="5821702155890664" title="Controls">
             <sub-events>
                 <event-block any="1" sid="7243244512327734">
                     <conditions>
@@ -73,25 +89,55 @@
                 </event-block>
             </sub-events>
         </event-group>
-        <event-group description="" sid="9482662385140615" title="Ball">
+        <comment>Handles the bounce logic around the ball</comment>
+        <event-group collapsed="1" description="" sid="9482662385140615" title="Ball">
             <sub-events>
                 <event-block sid="629908649590618">
                     <conditions>
                         <condition id="-2" name="Compare Y" sid="5769344288594379" type="Ball">
                             <param id="0" name="Comparison">2</param>
-                            <param id="1" name="Y co-ordinate">0</param>
+                            <param id="1" name="Y co-ordinate">UITop.Y + (UITop.Height/2)</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-10" name="Set value" sid="4022878821041994" type="Ball">
-                            <param id="0" name="Instance variable">Speed</param>
-                            <param id="1" name="Value">Ball.Speed * -1</param>
-                        </action>
-                        <action id="-2" name="Set Y" sid="9875111535736575" type="Ball">
-                            <param id="0" name="Y">0</param>
+                        <action id="-8" name="Set angle" sid="4611577377986782" type="Ball">
+                            <param id="0" name="Angle">270+(90-Ball.Angle)</param>
                         </action>
                     </actions>
                 </event-block>
+                <event-block sid="5548374723837924">
+                    <conditions>
+                        <condition id="-1" name="Compare X" sid="6527086994619392" type="Ball">
+                            <param id="0" name="Comparison">2</param>
+                            <param id="1" name="X co-ordinate">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-8" name="Set angle" sid="3031268488276177" type="Ball">
+                            <param id="0" name="Angle">0 + (180-Ball.Angle)</param>
+                        </action>
+                        <action id="-1" name="Set X" sid="7482628549830705" type="Ball">
+                            <param id="0" name="X">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="9529919024146631">
+                    <conditions>
+                        <condition id="-1" name="Compare X" sid="5881461886778561" type="Ball">
+                            <param id="0" name="Comparison">4</param>
+                            <param id="1" name="X co-ordinate">LayoutWidth</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-8" name="Set angle" sid="2042682341419862" type="Ball">
+                            <param id="0" name="Angle">180 + (0 - Ball.Angle)</param>
+                        </action>
+                        <action id="-1" name="Set X" sid="7033222092785019" type="Ball">
+                            <param id="0" name="X">LayoutWidth - Ball.Width</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>The angle of the ball&apos;s reflection is based on how far off the center of the paddle the ball hits</comment>
                 <event-block sid="9226416197626216">
                     <conditions>
                         <condition id="0" name="On collision with another object" sid="690543295485235" type="Ball">
@@ -99,12 +145,12 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-10" name="Set value" sid="9330689353034169" type="Ball">
-                            <param id="0" name="Instance variable">Speed</param>
-                            <param id="1" name="Value">Ball.Speed*-1</param>
+                        <action id="-8" name="Set angle" sid="5548300385485372" type="Ball">
+                            <param id="0" name="Angle">270 + ((Ball.X - Paddle.X)/(Paddle.Width/2))*60</param>
                         </action>
                     </actions>
                 </event-block>
+                <comment>Reset when we go off the bottom of the screen</comment>
                 <event-block sid="9593051884963584">
                     <conditions>
                         <condition id="-2" name="Compare Y" sid="8363907132925997" type="Ball">
@@ -119,13 +165,60 @@
                         <action id="-1" name="Set X" sid="9208774322845359" type="Ball">
                             <param id="0" name="X">Paddle.X</param>
                         </action>
+                        <action id="-8" name="Set angle" sid="1567137544973761" type="Ball">
+                            <param id="0" name="Angle">0</param>
+                        </action>
                         <action id="-12" name="Set group active" sid="6271395229645883" type="System">
                             <param id="0" name="Group name">&quot;LevelActive&quot;</param>
                             <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="7219650937439858" type="System">
+                            <param id="0" name="Variable">Lives</param>
+                            <param id="1" name="Value">Lives-1</param>
+                        </action>
+                        <action id="0" name="Call function" sid="9185324937282899" type="UpdateUI">
+                            <param id="0" name="Name">&quot;UpdateUI&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
                         </action>
                     </actions>
                 </event-block>
             </sub-events>
         </event-group>
+        <event-group description="" disabled="1" sid="5495123579831144" title="Debug">
+            <sub-events>
+                <event-block sid="6810953942947892">
+                    <conditions>
+                        <condition id="1" name="On any key pressed" sid="8028576696728969" type="Keyboard" />
+                    </conditions>
+                    <actions>
+                        <action id="-17" name="Move forward" sid="6088989086318761" type="Ball">
+                            <param id="0" name="Distance">5.</param>
+                        </action>
+                        <action id="0" name="Set text" sid="4364219162120201" type="DebugConsole">
+                            <param id="0" name="Text">&quot;Ball Angle:&quot; &amp; Ball.Angle &amp; &quot;   X: &quot; &amp; Ball.X &amp; &quot;    Y: &quot; &amp; Ball.Y</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-block sid="7582076536677676">
+            <conditions />
+            <actions />
+        </event-block>
+        <event-block sid="6686312551969542">
+            <conditions>
+                <condition id="0" name="On function" sid="5703169562571482" type="UpdateUI">
+                    <param id="0" name="Name">&quot;UpdateUI&quot;</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="0" name="Set text" sid="398267481071354" type="Score">
+                    <param id="0" name="Text">Score</param>
+                </action>
+                <action id="0" name="Set text" sid="3768605877921995" type="Balls">
+                    <param id="0" name="Text">Lives</param>
+                </action>
+            </actions>
+        </event-block>
     </events>
 </c2eventsheet>
