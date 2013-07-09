@@ -3,31 +3,37 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Level 1</name>
     <events>
+        <variable constant="0" name="BallActive" sid="8950691831255812" static="0" type="number">0</variable>
         <variable constant="0" name="BounceY" sid="315551210991567" static="0" type="number">0</variable>
         <variable constant="0" name="BounceX" sid="7254206758824236" static="0" type="number">0</variable>
         <variable constant="0" name="Lives" sid="7973244838052505" static="0" type="number">3</variable>
         <variable constant="0" name="Score" sid="6456173871297704" static="0" type="number">0</variable>
         <comment>Initial setup</comment>
-        <event-group description="" sid="957797604085997" title="Level Start">
+        <event-group description="" sid="957797604085997" title="Start Round">
             <sub-events>
                 <event-block sid="9260387561000024">
                     <conditions>
                         <condition id="1" name="On any key pressed" sid="4768239916811569" type="Keyboard" />
-                        <condition id="-15" inverted="1" name="Is group active" sid="2046919089521791" type="System">
-                            <param id="0" name="Group name">&quot;LevelActive&quot;</param>
+                        <condition id="-14" name="Compare variable" sid="8009312874186936" type="System">
+                            <param id="0" name="Variable">BallActive</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-12" name="Set group active" sid="2652514764999118" type="System">
-                            <param id="0" name="Group name">&quot;LevelActive&quot;</param>
-                            <param id="1" name="State">1</param>
-                        </action>
-                        <action id="-8" name="Set angle" sid="6995594538628601" type="Ball">
+                        <action id="-8" name="Set angle" sid="6140165156667597" type="Ball">
                             <param id="0" name="Angle">270</param>
+                        </action>
+                        <action behavior="Bullet" id="0" name="Set speed" sid="8771046044394871" type="Ball">
+                            <param id="0" name="Speed">300</param>
                         </action>
                         <action id="0" name="Call function" sid="5639517633543272" type="Function">
                             <param id="0" name="Name">&quot;UpdateUI&quot;</param>
                             <param id="1" name="Parameter {n}"></param>
+                        </action>
+                        <action id="-9" name="Set value" sid="6244984162261411" type="System">
+                            <param id="0" name="Variable">BallActive</param>
+                            <param id="1" name="Value">1</param>
                         </action>
                     </actions>
                 </event-block>
@@ -37,21 +43,7 @@
                 </event-block>
             </sub-events>
         </event-group>
-        <event-group description="" inactive="1" sid="7116492847067155" title="LevelActive">
-            <sub-events>
-                <event-block sid="7431757058675383">
-                    <conditions>
-                        <condition id="-1" name="Every tick" sid="3647517043591071" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-17" name="Move forward" sid="5909433676663753" type="Ball">
-                            <param id="0" name="Distance">Ball.Speed</param>
-                        </action>
-                    </actions>
-                </event-block>
-            </sub-events>
-        </event-group>
-        <event-group collapsed="1" description="" sid="5821702155890664" title="Controls">
+        <event-group description="" sid="5821702155890664" title="Controls">
             <sub-events>
                 <event-block any="1" sid="7243244512327734">
                     <conditions>
@@ -95,17 +87,8 @@
         <event-group description="" sid="9482662385140615" title="Ball">
             <sub-events>
                 <event-block sid="629908649590618">
-                    <conditions>
-                        <condition id="-2" name="Compare Y" sid="5769344288594379" type="Ball">
-                            <param id="0" name="Comparison">2</param>
-                            <param id="1" name="Y co-ordinate">UITop.Y + (UITop.Height/2)</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-8" name="Set angle" sid="4611577377986782" type="Ball">
-                            <param id="0" name="Angle">270+(90-Ball.Angle)</param>
-                        </action>
-                    </actions>
+                    <conditions />
+                    <actions />
                 </event-block>
                 <event-block sid="5548374723837924">
                     <conditions>
@@ -147,7 +130,7 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-8" name="Set angle" sid="5548300385485372" type="Ball">
+                        <action id="-8" name="Set angle" sid="5330187738509984" type="Ball">
                             <param id="0" name="Angle">270 + ((Ball.X - Paddle.X)/(Paddle.Width/2))*60</param>
                         </action>
                     </actions>
@@ -161,9 +144,6 @@
                     </conditions>
                     <actions>
                         <action id="-9" name="Destroy" sid="6825778961146116" type="Brick" />
-                        <action id="-18" name="Rotate clockwise" sid="8699839570287039" type="Ball">
-                            <param id="0" name="Degrees">180</param>
-                        </action>
                         <action id="-10" name="Add to" sid="3061136335928658" type="System">
                             <param id="0" name="Variable">Score</param>
                             <param id="1" name="Value">10</param>
@@ -189,12 +169,8 @@
                         <action id="-1" name="Set X" sid="9208774322845359" type="Ball">
                             <param id="0" name="X">Paddle.X</param>
                         </action>
-                        <action id="-8" name="Set angle" sid="1567137544973761" type="Ball">
-                            <param id="0" name="Angle">0</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="6271395229645883" type="System">
-                            <param id="0" name="Group name">&quot;LevelActive&quot;</param>
-                            <param id="1" name="State">0</param>
+                        <action behavior="Bullet" id="0" name="Set speed" sid="7162305255511913" type="Ball">
+                            <param id="0" name="Speed">0</param>
                         </action>
                         <action id="-9" name="Set value" sid="7219650937439858" type="System">
                             <param id="0" name="Variable">Lives</param>
@@ -203,6 +179,10 @@
                         <action id="0" name="Call function" sid="5445031366849142" type="Function">
                             <param id="0" name="Name">&quot;UpdateUI&quot;</param>
                             <param id="1" name="Parameter {n}"></param>
+                        </action>
+                        <action id="-9" name="Set value" sid="8355499793257758" type="System">
+                            <param id="0" name="Variable">BallActive</param>
+                            <param id="1" name="Value">0</param>
                         </action>
                     </actions>
                 </event-block>

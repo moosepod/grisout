@@ -10,15 +10,17 @@
     <unique-id>yr3efbn2115t</unique-id>
     <saved-with-version>13200</saved-with-version>
     <used-plugins>
-        <plugin author="Scirra" id="Text" version="1">Text</plugin>
-        <plugin author="Scirra" id="gamepad" version="1">Gamepad</plugin>
         <plugin author="Scirra" id="Function" version="1">Function</plugin>
         <plugin author="Scirra" id="Keyboard" version="1">Keyboard</plugin>
         <plugin author="Scirra" id="Sprite" version="1">Sprite</plugin>
+        <plugin author="Scirra" id="Text" version="1">Text</plugin>
+        <plugin author="Scirra" id="gamepad" version="1">Gamepad</plugin>
     </used-plugins>
     <used-behaviors>
+        <behavior author="Scirra" id="Bullet" version="1">Bullet</behavior>
         <behavior author="Scirra" id="EightDir" version="1">8 Direction</behavior>
         <behavior author="Scirra" id="bound" version="1">Bound to layout</behavior>
+        <behavior author="Scirra" id="solid" version="1">Solid</behavior>
     </used-behaviors>
     <used-effects />
     <configurations>
@@ -47,7 +49,7 @@
                 <plugin id="Text" />
             </object-type>
         </object-folder>
-        <object-folder expanded="0" name="UI">
+        <object-folder expanded="1" name="UI">
             <object-type name="Score" sid="1388035876987929">
                 <plugin id="Text" />
             </object-type>
@@ -56,6 +58,11 @@
             </object-type>
             <object-type name="UITop" sid="2216017453637863">
                 <plugin id="Sprite" />
+                <behaviors>
+                    <behavior-type name="Solid" sid="2682615474354142">
+                        <behavior id="solid" />
+                    </behavior-type>
+                </behaviors>
                 <animation-folder expanded="1">
                     <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="8131177681383075" speed="5">
                         <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
@@ -75,6 +82,9 @@
                 <behavior-type name="BoundToLayout" sid="7618330777777809">
                     <behavior id="bound" />
                 </behavior-type>
+                <behavior-type name="Solid" sid="6700876096787521">
+                    <behavior id="solid" />
+                </behavior-type>
             </behaviors>
             <animation-folder expanded="1">
                 <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="2407309918941043" speed="5">
@@ -93,14 +103,24 @@
             <instance-variables>
                 <instance-variable name="Speed" sid="7906623888297819" type="number" />
             </instance-variables>
+            <behaviors>
+                <behavior-type name="Bullet" sid="97006094034752">
+                    <behavior id="Bullet" />
+                </behavior-type>
+            </behaviors>
             <animation-folder expanded="1">
                 <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="2304097222259874" speed="5">
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                    <frame duration="1" hotspotX="0.516129" hotspotY="0.483871" />
                 </animation>
             </animation-folder>
         </object-type>
         <object-type name="Brick" sid="8930170374003708">
             <plugin id="Sprite" />
+            <behaviors>
+                <behavior-type name="Solid" sid="2285849214773366">
+                    <behavior id="solid" />
+                </behavior-type>
+            </behaviors>
             <animation-folder expanded="1">
                 <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="4104092990968964" speed="5">
                     <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
